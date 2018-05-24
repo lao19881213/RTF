@@ -14,7 +14,7 @@
 
 using namespace aoflagger;
 
-Rtflagger::Rtflagger() :
+Rtflagger::Rtflagger() 
 {
 }
 
