@@ -1,6 +1,8 @@
 #ifndef RTFLAGGER_H
 #define RTFLAGGER_H
 
+#include "stopwatch.h"
+
 #include <boost/thread/mutex.hpp>
 
 #include <vector>
@@ -21,9 +23,13 @@ class Rtflagger
 	public:
 		Rtflagger();
 		~Rflagger();
+                void Run();
 		
 	private:
 		Rtflagger(const Rtflagger&) { }
+                Stopwatch _readWatch, _processWatch, _writeWatch;
+                aoflagger::AOFlagger *_flagger;
+                aoflagger::Strategy *_strategy;
 		void operator=(const Rflagger&) { }
 };
 
