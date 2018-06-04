@@ -14,11 +14,20 @@
 
 using namespace aoflagger;
 
-Rtflagger::Rtflagger() 
+Rtflagger::Rtflagger():
+_flagger(0),
+_strategy(0) 
 {
 }
 
 Rtflagger::~Rtflagger()
 {
-	//delete *;
+        delete _flagger;
+	delete _strategy;
+}
+
+void Rtflagger::Run(double timeRes_s, double freqRes_kHz)
+{
+        _readWatch.Start();
+
 }

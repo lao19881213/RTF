@@ -23,7 +23,7 @@ class Rtflagger
 	public:
 		Rtflagger();
 		~Rflagger();
-                void Run();
+                void Run(double timeRes_s, double freqRes_kHz);
 		
 	private:
 		Rtflagger(const Rtflagger&) { }
