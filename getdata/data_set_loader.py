@@ -252,6 +252,7 @@ class data_set_loader(object):
 	'''
         with data_set_loader.time_to_load_chunks:
             time_window_centre = time_ordered_ms_table.getcol("TIME")
+            self._time_wc = time_ordered_ms_table.getcol("TIME")
         casa_ms_table.close()
         time_ordered_ms_table.close()
         with data_set_loader.time_to_load_chunks:
