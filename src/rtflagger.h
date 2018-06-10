@@ -18,12 +18,27 @@ namespace aoflagger {
 	class Strategy;
 }
 
+struct SpeadRecData{
+                double freq_start_hz;
+                double freq_inc_hz;
+                int num_baselines;
+                int num_channels;
+                int num_stations;
+                double phase_centre_ra_deg;
+                double phase_centre_dec_deg;
+                double time_average_sec;
+                double time_inc_sec;
+                std::string time_start_mjd_utc; 
+                };
+
 class Rtflagger
 {
 	public:
 		Rtflagger();
 		~Rflagger();
-                void Run(double timeRes_s, double freqRes_kHz);
+                void Run(double timeRes_s, double freqRes_kHz, SpeadRecData SRecData);
+                void processAllContiguousBands(size_t timeAvgFactor, size_t freqAvgFactor);
+                void processOneContiguousBand(const std::string& outputFilename, size_t timeAvgFactor, size_t freqAvgFactor);
 		
 	private:
 		Rtflagger(const Rtflagger&) { }

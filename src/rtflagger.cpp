@@ -26,7 +26,7 @@ Rtflagger::~Rtflagger()
 	delete _strategy;
 }
 
-void Rtflagger::Run(double timeRes_s, double freqRes_kHz)
+void Rtflagger::Run(double timeRes_s, double freqRes_kHz, SpeadRecData SRecData)
 {
         _readWatch.Start();
 
