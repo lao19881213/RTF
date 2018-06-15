@@ -36,7 +36,7 @@ class Rtflagger
 	public:
 		Rtflagger();
 		~Rflagger();
-                void Run(double timeRes_s, double freqRes_kHz, SpeadRecData SRecData);
+                void Run(SpeadRecData SRecData);
                 void processAllContiguousBands(size_t timeAvgFactor, size_t freqAvgFactor);
                 void processOneContiguousBand(const std::string& outputFilename, size_t timeAvgFactor, size_t freqAvgFactor);
 		
