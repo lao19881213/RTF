@@ -29,6 +29,12 @@ Rtflagger::~Rtflagger()
 void Rtflagger::Run(SpeadRecData SRecData)
 {
         _readWatch.Start();
+
+        _subbandEdgeFlagCount = round(_subbandEdgeFlagWidthKHz / (SRecData.freq_inc_hz/1000.0));
+        _quackInitSampleCount = round(_initDurationToFlag / _mwaConfig.Header().integrationTime);
+        _quackEndSampleCount = round(_endDurationToFlag / _mwaConfig.Header().integrationTime);
+        _flagger = new AOFlagger();
+
         
 
 }
