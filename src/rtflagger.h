@@ -32,10 +32,10 @@ struct SpeadRecData{
                 int time_index;
                 double time_inc_sec;
                 double time_start_mjd_utc; 
-                double uu;
-                double vv;
-                double ww;
-                double vis_amp;
+                double *uu;
+                double *vv;
+                double *ww;
+                double **vis_amp;
                 };
 
 class Rtflagger
