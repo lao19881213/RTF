@@ -35,7 +35,7 @@ struct SpeadRecData{
                 double *uu;
                 double *vv;
                 double *ww;
-                double **vis_amp;
+                double *vis_amp;
                 };
 
 class Rtflagger
@@ -44,21 +44,25 @@ class Rtflagger
 		Rtflagger();
 		~Rflagger();
                 void Run(SpeadRecData SRecData);
-                void SetSubbandEdgeFlagWidth(double edgeFlagWidth) { _subbandEdgeFlagWidthKHz = edgeFlagWidth; }
-                void processAllContiguousBands(size_t timeAvgFactor, size_t freqAvgFactor);
-                void processOneContiguousBand(const std::string& outputFilename, size_t timeAvgFactor, size_t freqAvgFactor);
+                void SetFlagFileTemplate(const std::string& flagFileTemplate) { _flagFileTemplate = flagFileTemplate; }
 		
 	private:
 		Rtflagger(const Rtflagger&) { }
                 Stopwatch _readWatch, _processWatch, _writeWatch;
                 aoflagger::AOFlagger *_flagger;
                 aoflagger::Strategy *_strategy;
+                std::map<std::pair<size_t, size_t>, aoflagger::ImageSet*> _imageSetBuffers;
+                std::map<std::pair<size_t, size_t>, aoflagger::FlagMask*> _flagBuffers;
+                aoflagger::FlagMask *_correlatorMask, *_fullysetMask;
+                std::queue<std::pair<size_t,size_t> > _baselinesToProcess;
+                std::unique_ptr<ProgressBar> _progressBar;
+                size_t _baselinesToProcessCount;
 		void operator=(const Rflagger&) { }
-                double _subbandEdgeFlagWidthKHz;
-                size_t _subbandEdgeFlagCount;
-                size_t _subbandCount;
-                size_t _quackInitSampleCount, _quackEndSampleCount;
                 double _initDurationToFlag, _endDurationToFlag;
+                std::unique_ptr<class FlagReader> _flagReader;
+
+                void baselineProcessThreadFunc();
+                void processBaseline(size_t antenna1, size_t antenna2, aoflagger::QualityStatistics &statistics);
 };
 
 #endif
